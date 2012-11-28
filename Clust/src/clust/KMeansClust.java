@@ -19,13 +19,14 @@ import javax.imageio.ImageIO;
 public class KMeansClust {
    
     private final Distance dist;
+    private Color[] points; 
     Random rand = new Random(System.currentTimeMillis());
     
      public KMeansClust(Distance dist){
-        this.dist = dist;
+        this.dist = dist;  
     }
    
-     private  Color[] getPoints( BufferedImage image)
+     private  void getPoints( BufferedImage image)
      {
         int pix,r,g,b,k=0;
         Color[] colors = new Color[image.getHeight()*image.getWidth()];
@@ -45,21 +46,29 @@ public class KMeansClust {
                 }
             }      
         }
-            return colors;
+            this.points = colors;
      }
      
-     private Color[]  kmeans(Color[] points, final int k)
+     private Color[]  kmeans( final int k, int maxNumberOfIterations)
      {           
          Color [] centers  = new Color[k];    
          Set<Color> colors = new HashSet<Color>();
-      
+         
+         ///@todo zrob z tego opcje
+//         for(int i = 0; i< k; i++)
+//         {
+//             centers[i] = new Color(Math.abs( rand.nextInt() % 256), Math.abs( rand.nextInt() % 256) , Math.abs( rand.nextInt() % 256));
+//          }   
+         
          for(int i = 0; i< k; i++)
-         {
-             centers[i] = new Color(Math.abs( rand.nextInt() % 256), Math.abs( rand.nextInt() % 256) , Math.abs( rand.nextInt() % 256));
-          }   
+         {      
+             int n = Math.abs( rand.nextInt() % (points.length));
+             centers[i] = points[n];
+          }
          
          while(true)
          {
+             maxNumberOfIterations--;
             Color[][] clusters = new Color [k][];
 
             for(int i = 0; i< k; i++)            
@@ -99,15 +108,18 @@ public class KMeansClust {
                  {
                      numberOfConZeroDists = 0;
                  }
+                 
+ 
 
-                 if (numberOfConZeroDists == k)
+                 if (numberOfConZeroDists == k || maxNumberOfIterations <= 0)
                  {
                     
                      return centers;
                  }
                  
-                 centers[i] = newCenter;
-                  System.out.println("new center: " + newCenter);
+               centers[i] = newCenter;
+               System.out.println("new center: " + newCenter);
+                 
             }
         }     
      }
@@ -136,15 +148,18 @@ public class KMeansClust {
          {
              return new Color((int)r/lenght, (int)g/lenght, (int)b/lenght);
          }
-         return new Color(Math.abs( rand.nextInt() % 256), Math.abs( rand.nextInt() % 256) , Math.abs( rand.nextInt() % 256));
+         //return new Color(Math.abs( rand.nextInt() % 256), Math.abs( rand.nextInt() % 256) , Math.abs( rand.nextInt() % 256));
+        return this.points[Math.abs( rand.nextInt() % (points.length))];
     }
     
         public static void main(String[] args) throws IOException {
         HClust hc = new HClust(new EuclideanDistance());
-        BufferedImage image = ImageIO.read(new File("./images/icon.png"));
+        BufferedImage image = ImageIO.read(new File("./images/icon.jpg"));
+         
         KMeansClust clusterer = new KMeansClust(new EuclideanDistance());
         int k =3, pix =0;
-        Color[] result = clusterer.kmeans(clusterer.getPoints(image), k);
+        clusterer.getPoints(image);
+        Color[] result = clusterer.kmeans(k, 20);
         int n=0;
         int width = image.getWidth();
         int height = image.getHeight();
@@ -163,17 +178,6 @@ public class KMeansClust {
         }
         
         ImageIO.write(image, "jpg", new File("./images/out/icon_KMEANS.png"));
-        
-//         for(int i=0;i<image.getWidth();i++){
-//            for(int j=0;j<image.getHeight();j++){
-//                while(clust.clusts[c].isEmpty()){
-//                    c++;
-//                }
-//                pix = reps[rep/(imgSize+1)].toInt();//clust.clusts[c].get(0).toInt();
-//                clust.clusts[c].remove(0);
-//                image.setRGB(i,j,pix);
-//                rep++;
-//            }
-//        }
+
     }
 }
