@@ -154,7 +154,7 @@ public class KMeansClust {
     
         public static void main(String[] args) throws IOException {
         HClust hc = new HClust(new EuclideanDistance());
-        BufferedImage image = ImageIO.read(new File("./images/icon.jpg"));
+        BufferedImage image = ImageIO.read(new File("./images/ref1.jpg"));
          
         KMeansClust clusterer = new KMeansClust(new EuclideanDistance());
         int k =3, pix =0;
