@@ -72,7 +72,6 @@ public class DBScanClusters {
         	}
         	if (!checkInClusters(NeighborPts.get(i))){
         		clusts[nClust].add((Color)colors[NeighborPts.get(i)]);
-//        		System.out.println("DODANE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         	}
         }	
     }

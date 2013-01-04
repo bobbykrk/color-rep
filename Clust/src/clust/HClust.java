@@ -62,7 +62,6 @@ public class HClust {
             }
         }
         ImageIO.write(image, "jpg", new File("images/icon_p.jpg"));
-        
     }
     
     public Color findRep(List<Color> colors){
