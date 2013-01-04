@@ -136,7 +136,6 @@ public class DBScan {
 			g += c.vec[1];
 			b += c.vec[2];
 		}
-                
 		r /= s;
 		g /= s;
 		b /= s;
