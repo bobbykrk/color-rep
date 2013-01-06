@@ -152,18 +152,19 @@ public class KMeansClust {
         return this.points[Math.abs( rand.nextInt() % (points.length))];
     }
     
-        public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         HClust hc = new HClust(new EuclideanDistance());
         BufferedImage image = ImageIO.read(new File("./images/ref1.jpg"));
          
         KMeansClust clusterer = new KMeansClust(new EuclideanDistance());
         int k =3, pix =0;
         clusterer.getPoints(image);
-        Color[] result = clusterer.kmeans(k, 20);
+        Color[] result = clusterer.kmeans(k, 200);
         int n=0;
         int width = image.getWidth();
         int height = image.getHeight();
         
+        //narysuj obrazek wyjściowy
         for (int m = 0; m< k; m++)
         {
             for(int i= (width / k) * m ; i<(width / k) * (m +1);i++){
