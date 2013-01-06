@@ -65,7 +65,8 @@ public class HClust {
                         image.setRGB(i,j,pix);
                         rep++;
                     }
-                }
+                }                ImageIO.write(image, "bmp", new File("./images/out/hclust/" + fileName + p + "_hclust_" + q + ".bmp"));
+
                 ImageIO.write(image, "bmp", new File("./images/out/hclust/" + fileName + p + "_hclust_" + q + ".bmp"));
             }
         }
