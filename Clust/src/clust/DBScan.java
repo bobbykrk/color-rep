@@ -23,8 +23,8 @@ public class DBScan {
 	public static void main(String[] args) throws IOException {
 		DBScan dbs = new DBScan(new EuclideanDistance());
 //		DBScan dbs = new DBScan(new ManhatanDistance());
-		String fileIn = "images/icon.jpg";
-		String fileOut = "images/icon_out2";
+		String fileIn = "images/ref1.jpg";
+		String fileOut = "images/ref1_out2";
 		BufferedImage image = ImageIO.read(new File(fileIn));
 
 		double eps = 5;
