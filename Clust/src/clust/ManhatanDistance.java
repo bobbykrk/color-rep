@@ -6,17 +6,16 @@ package clust;
 
 /**
  *
- * @author Robert
+ * @author czarek
  */
-public class EuclideanDistance implements Distance {
-
+public class ManhatanDistance implements Distance{
+    
     @Override
     public double compute(Color a, Color b) {
         double ret = 0.0;
         for(int i=0;i<a.vec.length;i++){
-            ret += (a.vec[i]-b.vec[i])*(a.vec[i]-b.vec[i]);
+            ret += Math.abs(a.vec[i]-b.vec[i]);
         }
-        return Math.sqrt(ret);
+        return ret;
     }
-    
 }

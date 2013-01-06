@@ -5,4 +5,4 @@
 *.war
 *.ear
 /Clust/nbproject/private/
-/MorphoAdnoter/nbproject/private/
+/Clust/build/

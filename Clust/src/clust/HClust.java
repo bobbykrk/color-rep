@@ -26,7 +26,8 @@ public class HClust {
      */
     public static void main(String[] args) throws IOException {
         HClust hc = new HClust(new EuclideanDistance());
-        BufferedImage image = ImageIO.read(new File("C:/Users/Robert/Pictures/icon.jpg"));
+       // BufferedImage image = ImageIO.read(new File("C:/Users/Robert/Pictures/icon.jpg"));
+         BufferedImage image = ImageIO.read(new File("./images/icon.jpg"));
         int pix,r,g,b,k=0;
         Color[] colors = new Color[image.getHeight()*image.getWidth()];
         for(int i=0;i<image.getWidth();i++){
@@ -61,7 +62,7 @@ public class HClust {
                 rep++;
             }
         }
-        ImageIO.write(image, "jpg", new File("C:/Users/Robert/Pictures/icon_p.jpg"));
+        ImageIO.write(image, "jpg", new File("./images/out/icon_H2.png"));
         
     }
     
