@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Marcin
+ * Zajmuje się wykonaniem grupowania DBScan
  */
 public class DBScanClusters {
     int counter=0;
@@ -15,7 +14,10 @@ public class DBScanClusters {
     boolean[] visited;
     Distance dist;
     
-    @SuppressWarnings("unchecked")
+    /**
+     * @param colors Tablica kolorów obrazka
+     * @param dist Metryka odległości miedzy pikselami
+     */
     public DBScanClusters(Color[] colors, Distance dist){
         clusts = (List<Color>[]) new ArrayList[colors.length];
         clusts[0] = new ArrayList(); //SZUM
@@ -29,6 +31,11 @@ public class DBScanClusters {
         this.dist = dist;
     }
     
+    /**
+     * Główna funkcja algorytmu DBSCAN
+     * @param eps maksymalna odległość pomiędzy punktami gęstościowo osiągalnymi
+     * @param MinPts minimalna liczba punktów w sąsiedztwie wymagana do stworzenia klastra
+     */
     public void DBSCAN (double eps, int MinPts)
     {
         for(int i=0;i<colors.length;i++){
@@ -52,6 +59,14 @@ public class DBScanClusters {
         }
     }
     
+    /**
+     * Funkcja pomocnicza algorytmu DBSCAN analizująca nowostworzony klaster
+     * @param P indeks analizowanego pixela
+     * @param NeighborPts lista pixeli sąsiadujących z analizowanym klastrem
+     * @param nClust indeks analizowanego klastra
+     * @param eps maksymalna odległość pomiędzy punktami gęstościowo osiągalnymi
+     * @param MinPts minimalna liczba punktów w sąsiedztwie wymagana do stworzenia klastra
+     */
     private void expandCluster (int P, List<Integer> NeighborPts, int nClust, double eps, int MinPts)
     {
         clusts[nClust].add((Color)colors[P]);
@@ -75,9 +90,14 @@ public class DBScanClusters {
         }
     }
     
+    /**
+     * Funkcja pomocnicza dla analizującej klaster sprawdzająca czy na pixel znajduje się już w jakimś klastrze
+     * @param P indeks spradzanego pixela
+     * @return zwraca true jeżeli już jest w jakimś klastrze
+     */
     private boolean checkInClusters (int P)
     {
-        boolean ans=false;
+        boolean ans;
         for(int i=0;i<nClust;i++){
             ans = clusts[i].contains(P);
             if (ans)
@@ -86,9 +106,14 @@ public class DBScanClusters {
         return false;
     }
     
+    /**
+     * @param P indeks analizowanego pixela
+     * @param eps promień sąsiedztwa
+     * @return lista sąsiadów danego pixela w zadanym promieniu eps
+     */
     private List<Integer> regionQuery(int P, double eps)
     {
-        List<Integer> neighbours = new ArrayList<Integer>();
+        List<Integer> neighbours = new ArrayList<>();
         double tmp;
         for(int i=0;i<colors.length;i++){
             if(P!=i){

@@ -7,7 +7,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 /**
- * Klasa zajmuąca się przeprawdzeniem grupwania heirarchicznego
+ * Klasa zajmuąca się przeprowadzeniem grupowania hierarchicznego
  */
 public class HClust {
 

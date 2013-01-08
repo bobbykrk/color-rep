@@ -1,16 +1,12 @@
 package clust;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.List;
 import javax.imageio.ImageIO;
-import java.io.*;
 
 /**
- *
- * @author Marcin
+ * Klasa zajmuąca się przeprowadzeniem grupowania metodą DBScan
  */
 public class DBScan {
     
@@ -26,14 +22,14 @@ public class DBScan {
         
         DBScan dbs = new DBScan(new EuclideanDistance());
         //DBScan dbs = new DBScan(new ManhatanDistance());
-        String fileIn = "images/icon_9.jpg";
-        String fileOut = "images/out_KMEANS/icon_9b/icon_9_out";
+        String fileIn = "images/icon_1.jpg";
+        String fileOut = "images/out_KMEANS/icon_1_out";
         PrintWriter myout = new PrintWriter(new FileWriter(fileOut+".txt"),true);
         BufferedImage image = ImageIO.read(new File(fileIn));
         
         double eps = 5;
         int minPts = 10;
-        double eps1 = 0.500, eps2 = 20.000, epsSkip = 0.50000000000000000;
+        double eps1 = 0.500, eps2 = 2.500, epsSkip = 0.50000000000000000;
         int MinPts1 = 1, MinPts2 = 15, MinPtsSkip = 1, epsDiv=100;
         int best[][] = new int[7][2];
         
@@ -88,7 +84,6 @@ public class DBScan {
                 myout.write("eps="+eps+" minPts="+minPts+" nClust="+nClust+"\n");
                 for (int i=0;i<7;i++)
                 {
-                    //myout.write("testing");
                     myout.write("Liczba: "+best[i][0]+"   \t Kolor: " + reps[best[i][1]]+"\n");
                 }
                 myout.write("\n");
@@ -183,7 +178,12 @@ public class DBScan {
         }
         myout.close();
     }
-    
+ 
+    /**
+     * Wyznacza reprezentanta danej grupy
+     * @param colors Lista kolorów należących do danej grupy
+     * @return Kolor reprezentuący daną grupę
+     */
     public Color findRep(List<Color> colors){
         double r=0.0,g=0.0,b=0.0,dst = Double.POSITIVE_INFINITY,tmp;
         double s = (double)colors.size();
