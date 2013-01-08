@@ -15,7 +15,7 @@ public class Clusters {
     ClustDistance cdist;
     
     /**
-     * @param colors Tablica koloró obrazka
+     * @param colors Tablica kolorów obrazka
      * @param dist Metryka odległości miedzy pikselami
      * @param cdist Metryka odległości między grupami
      */
