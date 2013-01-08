@@ -1,15 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package clust;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Robert
+ * Zajmuje się wykonaniem grupowania heirarchicznego
  */
 public class Clusters {
     
@@ -19,6 +14,11 @@ public class Clusters {
     Distance dist;
     ClustDistance cdist;
     
+    /**
+     * @param colors Tablica koloró obrazka
+     * @param dist Metryka odległości miedzy pikselami
+     * @param cdist Metryka odległości między grupami
+     */
     public Clusters(Color[] colors, Distance dist, ClustDistance cdist){
         clusts = (List<Color>[]) new ArrayList[colors.length];
         for(int i=0;i<colors.length;i++){
@@ -30,7 +30,10 @@ public class Clusters {
         this.cdist = cdist;
     }
     
-    
+    /**
+     * Metoda łączy dwie grupy spośród clusts
+     * na podstwaie odległości dwóch najbardziej obległych od siebie pikseli
+     */
     public void connect(){
         int a = -1,b = -1;
         double dst = Double.POSITIVE_INFINITY,tmp;
@@ -60,6 +63,10 @@ public class Clusters {
         }   
     }
     
+    /**
+     * Przeprowadza grupwanie hierarchiczne
+     * @param n docelowa liczba grup
+     */
     public void compute(int n){
         while(nClust>n){
             connect();

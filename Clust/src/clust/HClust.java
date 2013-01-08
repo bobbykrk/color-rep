@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package clust;
 
 import java.awt.image.BufferedImage;
@@ -11,8 +7,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 /**
- *
- * @author Robert
+ * Klasa zajmuąca się przeprawdzeniem grupwania heirarchicznego
  */
 public class HClust {
 
@@ -30,7 +25,7 @@ public class HClust {
         
         for(int p=1;p<10;p++){
             for(int q=3;q<8;q+=2){
-                HClust hc = new HClust(new EuclideanDistance());
+                HClust hc = new HClust(new ManhatanDistance());
                 BufferedImage image = ImageIO.read(new File("./images/" + fileName + p + ext));
                 int pix,r,g,b,k=0;
                 Color[] colors = new Color[image.getHeight()*image.getWidth()];
@@ -65,13 +60,17 @@ public class HClust {
                         image.setRGB(i,j,pix);
                         rep++;
                     }
-                }                ImageIO.write(image, "bmp", new File("./images/out/hclust/" + fileName + p + "_hclust_" + q + ".bmp"));
-
-                ImageIO.write(image, "bmp", new File("./images/out/hclust/" + fileName + p + "_hclust_" + q + ".bmp"));
+                }                
+                ImageIO.write(image, "bmp", new File("./images/out/hclust/" + fileName + p + "_hclust_m_" + q + ".bmp"));
             }
         }
     }
     
+    /**
+     * Wyznacza reprezentanta danej grupy
+     * @param colors Lista kolorów należących do danej grupy
+     * @return Kolor reprezentuący daną grupę
+     */
     public Color findRep(List<Color> colors){
         double r=0.0,g=0.0,b=0.0,dst = Double.POSITIVE_INFINITY,tmp;
         double s = (double)colors.size();
