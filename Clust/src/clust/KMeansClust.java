@@ -143,7 +143,11 @@ public class KMeansClust {
             }
         }
         
+<<<<<<< HEAD
+        //numberOfFiles = 3;
+=======
         numberOfFiles = 3;
+>>>>>>> 367192ca76a403c4fd12fb7cb53d2a4e0b1c686a
          for (int n = 1; n <= numberOfFiles; n++) {
             doStuff(5, n, new ManhatanDistance() );
         }
