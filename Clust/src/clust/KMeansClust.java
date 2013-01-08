@@ -3,15 +3,13 @@ package clust;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 import javax.imageio.ImageIO;
 
 /**
  *
  * @author czarek
+ * Klasa implementująca algorytm k-means
  */
 public class KMeansClust {
 
@@ -22,7 +20,9 @@ public class KMeansClust {
         this.dist = dist;
     }
 
-    ///wczytaj tablice z wartosciami pikseli
+    /**
+    * wczytaj tablice z wartosciami pikseli
+    */
     private void getPoints(BufferedImage image) {
         int pix, r, g, b, k = 0;
         Color[] colors = new Color[image.getHeight() * image.getWidth()];
@@ -44,7 +44,9 @@ public class KMeansClust {
         this.points = colors;
     }
 
-    //główny algorytm
+    /**
+    * główny algorytm k-means
+    */
     private Color[] kmeans(final int k, int maxNumberOfIterations) {
         Color[] centers = new Color[k];
         int numberOfIterations = 0;
@@ -110,7 +112,10 @@ public class KMeansClust {
         }
     }
 
-    ///oblicza nową wartość średnią grupy
+    
+   /**
+    * oblicza nową wartość średnią grupy
+    */
     private Color calculateCenter(Color[] points) {
         long r = 0;
         long g = 0;
@@ -136,9 +141,13 @@ public class KMeansClust {
         return this.points[Math.abs(rand.nextInt() % (points.length))];
     }
     
-    
-    ///funkcja pomocznicza wykonująca algorytm k-means dla n plików, 
-    ///@param
+ 
+   /**
+    * funkcja pomocznicza wykonująca algorytm k-means
+    * @param numberOfGroups liczba grup
+    * @param n zmienna to iterowania po kolejnych plikach
+    * @param dist klasa obliczająca odległość
+    */
     private static void doStuff(int numberOfGroups, int n, Distance dist ) throws IOException{
         int k = numberOfGroups;
         String filenameIn = "./images/icon_"+n+".jpg";
@@ -171,7 +180,9 @@ public class KMeansClust {
         ImageIO.write(image, "bmp", new File(filenameOut));
     }
     
-
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) throws IOException {
         int numberOfFiles = 9;
 //         int numberOfFiles = 3;
