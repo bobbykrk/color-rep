@@ -7,6 +7,7 @@ package clust;
 /**
  *
  * @author czarek
+ * klasa obliczająca odległość w metrykce manhatan
  */
 public class ManhatanDistance implements Distance{
     
