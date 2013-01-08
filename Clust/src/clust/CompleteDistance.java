@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package clust;
 
 import java.util.List;
 
 /**
- *
- * @author Robert
+ * Klasa wyznaczająca całkowitą odległość między klasami
+ * (odległość pomiędzy dowama najbardziej odległymi pikselami między grupami)
  */
 public class CompleteDistance implements ClustDistance {
 
