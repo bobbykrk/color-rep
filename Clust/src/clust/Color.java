@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package clust;
 
 /**
- *
- * @author Robert
+ * Klasa reprezentuąca kolor w systemie RGB
  */
 public class Color implements Comparable<Color> {
     double[] vec;
